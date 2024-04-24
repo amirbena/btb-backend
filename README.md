@@ -20,15 +20,3 @@ Password: Amirbena1204
 UserName: amir12061970@gmail.com
 Password: Amirbena1205
 ``
-
-* **Method:** GET
-* **URL:** /api/v1/users
-* **Description:** Get a list of all users.
-* **Response:** JSON array of user objects.
-
-* **Method:** POST
-* **URL:** /api/v1/users
-* **Request Parameters:** (body) name: string, email: string
-* **Description:** Create a new user.
-* **Response:** JSON object representing the created user.
-Note: You can replace [Project Name] with the actual name of your project throughout this readme.
