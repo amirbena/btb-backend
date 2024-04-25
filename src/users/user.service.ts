@@ -7,7 +7,7 @@ import { UserRegisterDto } from "./dto/UserRegister.dto";
 import * as bcrypt from 'bcrypt';
 import { TokenDto } from "../token/type/token.dto";
 import tokenService from "../token/service/token.service";
-import { COOKIE_TOKEN_HEADER } from "../token/constants";
+import { AUTHORIZATION_TOKEN_HEADER, COOKIE_TOKEN_HEADER } from "../token/constants";
 import { UserLoginDto } from "./dto/UserLogin.dto";
 import { BCRYPT_ROUNDS } from "./constants";
 
@@ -32,7 +32,7 @@ export const userRegister = async (req: Request, res: Response) => {
         const tokenDto: TokenDto = { email, _id: savedUser._id };
         const token = await tokenService.signJWT(tokenDto);
         res.cookie(COOKIE_TOKEN_HEADER, token, { httpOnly: true });
-        return res.json({ user });
+        return res.json({ user, token });
     } catch (error) {
         console.log(error);
         res.status(HttpStatusCode.InternalServerError).json({ message: INTERNAL_SERVER_ERROR });
@@ -55,7 +55,7 @@ export const userLogin = async (req: Request, res: Response) => {
         const tokenDto: TokenDto = { email, _id: userWithEmail._id };
         const token = await tokenService.signJWT(tokenDto);
         res.cookie(COOKIE_TOKEN_HEADER, token, { httpOnly: true });
-        res.json({ user: userWithEmail });
+        res.json({ user: userWithEmail, token });
     } catch (error) {
         res.status(HttpStatusCode.InternalServerError).json({ message: INTERNAL_SERVER_ERROR });
     }

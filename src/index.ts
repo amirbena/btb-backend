@@ -11,7 +11,7 @@ import rickMortyController from './rickmorty/rickMorty.controller';
 dotenv.config({ path: `${process.cwd()}/environments/.${process.env.NODE_ENV}.env` });
 const app = express();
 
-app.use(cors({ origin: process.env.ORIGIN_URI }))
+app.use(cors({ origin: process.env.ORIGIN_URI, credentials: true, preflightContinue: true }))
 app.use(cookieParser());
 app.use(bodyParser.json());
 
@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 connectDB();
 
 app.use('/user', userController);
-app.use('/rickMorty',rickMortyController);
+app.use('/rickMorty', rickMortyController);
 
 app.get('/', (req, res) => {
     res.send('Hello from Express with TypeScript!');
