@@ -62,6 +62,7 @@ export const userLogin = async (req: Request, res: Response) => {
 
 }
 
+
 export default {
     getUserById,
     userRegister,

@@ -115,7 +115,7 @@ export const getCharacters = async (req: Request, res: Response) => {
     try {
         const resultFromAPI = await getItems(req, res);
         const characters = buildCharacterResponse(resultFromAPI);
-        res.json({ characters });
+        res.json(characters);
 
     } catch (error) {
         if (error instanceof RickMortyError) {
@@ -129,14 +129,17 @@ export const getCharacters = async (req: Request, res: Response) => {
 export const getEpisodes = async (req: Request, res: Response) => {
     try {
         const resultFromAPI = await getItems(req, res);
+        console.log("Result", resultFromAPI);
         const episodes = buildEpisodesResponse(resultFromAPI);
-        res.json({ episodes });
+        res.json(episodes);
 
     } catch (error) {
-        if (error instanceof RickMortyError) {
-            const { status, message } = error;
+        if ((error as RickMortyError).status) {
+            const errorToReturn: RickMortyError = error;
+            const { status, message: { error: message } } = errorToReturn;
             return res.status(status).json({ message });
         }
+        console.log("error", error);
         return res.status(HttpStatusCode.InternalServerError).json({ message: INTERNAL_SERVER_ERROR });
     }
 }
@@ -145,7 +148,7 @@ export const getLocations = async (req: Request, res: Response) => {
     try {
         const resultFromAPI = await getItems(req, res);
         const locations = buildLocationsResponse(resultFromAPI);
-        res.json({ locations });
+        res.json(locations);
 
     } catch (error) {
         if (error instanceof RickMortyError) {

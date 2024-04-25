@@ -1,4 +1,7 @@
 export class RickMortyError {
     status: number;
-    message: string;
+    message: ErrorMessage;
+}
+interface ErrorMessage {
+    error: string
 }
