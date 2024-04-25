@@ -11,12 +11,12 @@ It's Uses JWT For Authenticating Users And Give authencated Data manipulation fo
 ## Sign In for *Regular* User
 ``
 UserName: amir12061969@gmail.com
-Password: Amirbena1204
+Password:Amirbena1204
 ``
 
 
 ## SignIn for *ADMIN* User
 ``
 UserName: amir12061970@gmail.com
-Password: Amirbena1205
+Password:Amirbena1205
 ``
